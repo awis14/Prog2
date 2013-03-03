@@ -114,12 +114,11 @@ public class SubwaySim {
 
 			int alloverCounter = 0;
 			for (int alloverIter = 0; alloverIter < train.size(); alloverIter++) {
-				/*
-				 * System.out.print("Sehr geehrte Fahrgäste, Wagon ");
-				 * System.out.print(alloverIter); System.out.print(" enthält ");
-				 * System.out.print(train.get(alloverIter).passengerCount());
-				 * System.out.println(" Passagiere.");
-				 */
+				 System.out.print("Sehr geehrte Fahrgäste, Wagon ");
+				 System.out.print(alloverIter); System.out.print(" enthält ");
+				 System.out.print(train.get(alloverIter).passengerCount());
+				 System.out.println(" Passagiere.");
+				 
 				alloverCounter += train.get(alloverIter).passengerCount();
 			}
 			System.out.print("Also alles in allem ");
