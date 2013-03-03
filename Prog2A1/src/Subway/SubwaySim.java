@@ -14,7 +14,7 @@ public class SubwaySim {
 		ArrayList<Wagon> train = new ArrayList<Wagon>();
 		ArrayList<Station> track = new ArrayList<Station>();
 		int rand = (3 + (int) (Math.random() * ((8 - 3) + 1)));
-		for (int wagonIter = 0; wagonIter <= rand; wagonIter++) {
+		for (int wagonIter = 0; wagonIter <= rand-1; wagonIter++) {
 			train.add(new Wagon());
 		}
 		System.out.print("Sehr geehrter Fahrgäste, dieser Zug hat ");
@@ -34,11 +34,20 @@ public class SubwaySim {
 			System.out.print("Wartende: ");
 			System.out.println(station.waitingAt().size());
 			for (int l = 0; l < train.size() - 1; l++) {
-				for (int m = 0; m < train.get(l).passengerCount() - 1; m++) {
-					gotOut.add(train.get(l).getPassenger(m)
-							.getOut(j, train.get(l)));
-					if (train.get(l).getPassenger(m).isInAHurry()) {
-						hurryOut++;
+				for (int m = 0; m < train.get(l).passengerCount(); m++) {
+					Passenger leavingPassenger = train.get(l).getPassenger(m)
+							.getOut(j, train.get(l));
+					if (leavingPassenger != null) {
+						gotOut.add(leavingPassenger);
+						if(m > 0){
+							m--;
+						}
+						else{
+							m = 0;
+						}
+						if (train.get(l).getPassenger(m).isInAHurry()) {
+							hurryOut++;
+						}
 					}
 				}
 			}
@@ -51,7 +60,7 @@ public class SubwaySim {
 
 			ArrayList<Passenger> gotIn = new ArrayList<Passenger>();
 			int hurryIn = 0;
-			for (int k = 0; k < ((station.waitingAt().size())) ; k++) {
+			for (int k = 0; k < ((station.waitingAt().size())); k++) {
 				// All waiting passengers try to get into a random wagon
 				Passenger schroedingersPassenger = station
 						.waitingAt()
@@ -78,38 +87,39 @@ public class SubwaySim {
 								k--;
 								hurryIn++;
 								break;
-							}                                               
+							}
 						}
 					}
 				}
 			}
-			
+
 			int hurryStay = 0;
-			for(int i = 0 ; i < track.get(j).waitingAt().size() ; i++) {
-				if(track.get(j).waitingAt().get(i).isInAHurry()){
+			for (int i = 0; i < track.get(j).waitingAt().size(); i++) {
+				if (track.get(j).waitingAt().get(i).isInAHurry()) {
 					hurryStay++;
 				}
 			}
-			
+
 			System.out.print("Passagiere eingestiegen: ");
 			System.out.print(gotIn.size());
 			System.out.print(", davon ");
 			System.out.print(hurryIn);
 			System.out.println(" in Eile.");
-			
+
 			System.out.print("Passagiere zurückgelassen: ");
 			System.out.print(track.get(j).waitingAt().size());
 			System.out.print(", davon ");
 			System.out.print(hurryStay);
 			System.out.println(" in Eile.");
-			
+
 			int alloverCounter = 0;
-			for(int alloverIter = 0 ; alloverIter < train.size() ; alloverIter++){
-				/*System.out.print("Sehr geehrte Fahrgäste, Wagon ");
-				System.out.print(alloverIter);
-				System.out.print(" enthält ");
-				System.out.print(train.get(alloverIter).passengerCount());
-				System.out.println(" Passagiere.");*/
+			for (int alloverIter = 0; alloverIter < train.size(); alloverIter++) {
+				/*
+				 * System.out.print("Sehr geehrte Fahrgäste, Wagon ");
+				 * System.out.print(alloverIter); System.out.print(" enthält ");
+				 * System.out.print(train.get(alloverIter).passengerCount());
+				 * System.out.println(" Passagiere.");
+				 */
 				alloverCounter += train.get(alloverIter).passengerCount();
 			}
 			System.out.print("Also alles in allem ");
