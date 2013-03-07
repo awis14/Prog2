@@ -14,7 +14,7 @@ public class SubwaySim {
 		ArrayList<Wagon> train = new ArrayList<Wagon>();
 		ArrayList<Station> track = new ArrayList<Station>();
 		int rand = (3 + (int) (Math.random() * ((8 - 3) + 1)));
-		for (int wagonIter = 0; wagonIter <= rand-1; wagonIter++) {
+		for (int wagonIter = 0; wagonIter <= rand - 1; wagonIter++) {
 			train.add(new Wagon());
 		}
 		System.out.print("Sehr geehrter Fahrgäste, dieser Zug hat ");
@@ -39,10 +39,9 @@ public class SubwaySim {
 							.getOut(j, train.get(l));
 					if (leavingPassenger != null) {
 						gotOut.add(leavingPassenger);
-						if(m > 0){
+						if (m > 0) {
 							m--;
-						}
-						else{
+						} else {
 							m = 0;
 						}
 						if (train.get(l).getPassenger(m).isInAHurry()) {
@@ -114,11 +113,12 @@ public class SubwaySim {
 
 			int alloverCounter = 0;
 			for (int alloverIter = 0; alloverIter < train.size(); alloverIter++) {
-				 System.out.print("Sehr geehrte Fahrgäste, Wagon ");
-				 System.out.print(alloverIter); System.out.print(" enthält ");
-				 System.out.print(train.get(alloverIter).passengerCount());
-				 System.out.println(" Passagiere.");
-				 
+				System.out.print("Sehr geehrte Fahrgäste, Wagon ");
+				System.out.print(alloverIter);
+				System.out.print(" enthält ");
+				System.out.print(train.get(alloverIter).passengerCount());
+				System.out.println(" Passagiere.");
+
 				alloverCounter += train.get(alloverIter).passengerCount();
 			}
 			System.out.print("Also alles in allem ");
